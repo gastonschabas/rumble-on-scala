@@ -1,4 +1,4 @@
-name: CI Scala Format
+name: CI - Scala Format
 on:
   pull_request:
     branches:
