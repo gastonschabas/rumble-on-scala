@@ -6,4 +6,4 @@ just a project to experiment with different things around scala ecosystem.
 
 - ScalaTest
 - Github Action
-    
+- ScalaFmt
