@@ -8,5 +8,4 @@ lazy val root = (project in file("."))
   .settings(
     name := "rumble-on-scala",
     libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.0" % Test)
-    
   )
