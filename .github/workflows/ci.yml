@@ -20,8 +20,10 @@ jobs:
       run: sbt scalafmtCheckAll
     - name: Check Sbt Format
       run: sbt scalafmtSbtCheck
-    - name: Unit Test
-      run: sbt test
+    - name: Unit Test with Coverage
+      run: |
+        sbt coverage test
+        sbt coverageReport
     - name: Scapegoat
       run: sbt scapegoat
     - name: Scala Style
