@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Cache SBT
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.ivy2/cache
+          ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
     - uses: olafurpg/setup-scala@v5
     - name: Compile
       run: sbt compile
