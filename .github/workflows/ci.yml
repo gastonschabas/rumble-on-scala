@@ -21,9 +21,11 @@ jobs:
     - name: Check Sbt Format
       run: sbt scalafmtSbtCheck
     - name: Unit Test with Coverage
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       run: |
         sbt coverage test
-        sbt coverageReport
+        sbt coverageReport coveralls
     - name: Scapegoat
       run: sbt scapegoat
     - name: Scala Style
