@@ -1,0 +1,33 @@
+name: CI - Scala Format
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Actual Branch
+        uses: actions/checkout@v2
+      - name: Setup Java Environment
+        uses: actions/setup-java@v1
+      - name: Cache Sbt Paths
+        uses: action/cache@v2
+        with:
+          path: |
+            ~/.ivy2/cache
+            ~/.sbt
+          key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+      - name: Compile
+        run: sbt compile
+      - name: Check Scala Format
+        run: sbt scalafmtCheckAll
+      - name: Check Sbt Format
+        run: sbt scalafmtSbtCheck
+      - name: Run Static Code Analyzer
+        run: sbt scapegoat
+      - name: Test
+        run: sbt test
