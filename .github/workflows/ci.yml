@@ -25,11 +25,27 @@ jobs:
           key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
       - name: Compile
         run: sbt compile
+  scala-format:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Check Scala Format
         run: sbt scalafmtCheckAll
+  scala-sbt-format:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Check Sbt Format
         run: sbt scalafmtSbtCheck
+  scapegoat:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Run Static Code Analyzer
         run: sbt scapegoat
+  scala-unit-test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Test
         run: sbt test
