@@ -1,4 +1,4 @@
-name: CI - Scala Format
+name: CI
 on:
   pull_request:
     branches:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Java Environment
         uses: actions/setup-java@v1
       - name: Cache Sbt Paths
-        uses: action/cache@v2
+        uses: action/cache@v1.3.0
         with:
           path: |
             ~/.ivy2/cache
