@@ -15,7 +15,7 @@ jobs:
       - name: Setup Java Environment
         uses: actions/setup-java@v1
       - name: Cache Sbt Paths
-        uses: action/cache@v1
+        uses: actions/cache@v2
         with:
           path: |
             ~/.ivy2/cache
