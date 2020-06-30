@@ -24,4 +24,4 @@ jobs:
             ~/.sbt
           key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
       - name: Compile -> Check Format -> Lint -> Unit Test
-        run: sbt ;compile;scalafmtCheckAll;scalafmtSbtCheck;scapegoat;test
+        run: sbt ";compile;scalafmtCheckAll;scalafmtSbtCheck;scapegoat;test"
