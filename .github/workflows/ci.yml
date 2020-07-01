@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Actual Branch
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Setup Java Environment
         uses: actions/setup-java@v1.3.0
         with:
