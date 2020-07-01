@@ -31,5 +31,13 @@ jobs:
         run: sbt scalafmtSbtCheck
       - name: Run Static Code Analyzer
         run: sbt scapegoat
-      - name: Test
-        run: sbt test
+      - name: Test With Coverage
+        run: |
+          sbt coverage test
+          sbt coverageReport
+      - name: SonarCloud Scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sbt -Dsonar.organization=gastonschabas -Dsonar.projectKey=gastonschabas_rumble-on-scala -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN sonarScan
