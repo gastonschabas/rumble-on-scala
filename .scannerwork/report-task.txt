@@ -1,0 +1,6 @@
+projectKey=gastonschabas_rumble-on-scala
+serverUrl=http://localhost:9000
+serverVersion=8.4.0.35506
+dashboardUrl=http://localhost:9000/dashboard?id=gastonschabas_rumble-on-scala
+ceTaskId=AXNFNi4WIyEfgnP6zGMS
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXNFNi4WIyEfgnP6zGMS
