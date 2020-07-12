@@ -10,7 +10,7 @@ class GreeterTest extends AnyFunSuite with Matchers {
     greeter.sayHelloTo("gaston") should be("hello gaston")
   }
 
-  test("returns hello $name") {
+  test("returns hi $name") {
     val greeter = new Greeter
     greeter.sayHiTo("gaston") should be("hi gaston")
   }
