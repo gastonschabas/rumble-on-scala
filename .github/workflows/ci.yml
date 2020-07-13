@@ -42,4 +42,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sbt -Dsonar.organization=gastonschabas -Dsonar.projectKey=gastonschabas_rumble-on-scala -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN sonarScan
+          sbt -Dsonar.organization=gastonschabas -Dsonar.projectKey=gastonschabas_rumble-on-scala -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=src/main/scala -Dsonar.tests=src/test/scala -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml -Dsonar.scala.scapegoat.reportPath=target/scala-2.13/scapegoat-report/scapegoat.xml sonarScan
