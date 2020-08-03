@@ -10,9 +10,7 @@ scala:
 jdk:
   - openjdk8
 
-branches:
-  only:
-    - master
+if: branch = master
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION test
