@@ -1,0 +1,16 @@
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/launchers
+    - $HOME/.cache/coursier/v1
+
+language: scala
+scala:
+  - 2.13.2
+jdk:
+  - openjdk8
+
+if: branch = master
+
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION test
