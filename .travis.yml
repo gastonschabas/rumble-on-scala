@@ -17,5 +17,5 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
   - sbt ++$TRAVIS_SCALA_VERSION scapegoat
-  - sbt "++$TRAVIS_SCALA_VERSION coverage test"
+  - sbt coverage test
   - sbt ++$TRAVIS_SCALA_VERSION coverageReport
