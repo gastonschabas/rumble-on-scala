@@ -18,4 +18,4 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
   - sbt ++$TRAVIS_SCALA_VERSION scapegoat
   - sbt coverage test
-  - sbt ++$TRAVIS_SCALA_VERSION coverageReport
+  - sbt coverageReport
