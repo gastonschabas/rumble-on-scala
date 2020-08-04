@@ -12,6 +12,12 @@ jdk:
 
 if: branch = master
 
+addons:
+  sonarcloud:
+    organization: "gastonschabas" # the key of the org you chose at step #3
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
+
 script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtCheckAll
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
@@ -19,3 +25,4 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION scapegoat
   - sbt ++$TRAVIS_SCALA_VERSION coverage test
   - sbt ++$TRAVIS_SCALA_VERSION coverageReport
+  - sonar-scanner
