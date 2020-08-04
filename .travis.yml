@@ -17,5 +17,5 @@ addons:
     organization: "gastonschabas" # the key of the org you chose at step #3
 
 script:
-  - sbt ";scalafmtCheckAll ;scalafmtSbtCheck ;scalafmtSbtCheck ;scapegoat ;coverage test ;coverageReport"
+  - sbt ";scalafmtCheckAll;scalafmtSbtCheck;scalafmtSbtCheck;scapegoat;coverage test;coverageReport"
   - sonar-scanner
