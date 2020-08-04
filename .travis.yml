@@ -15,7 +15,8 @@ if: branch = master
 addons:
   sonarcloud:
     organization: "gastonschabas"
-    token: ${SONAR_TOKEN}
+    token:
+      secure: "qBJnImt2IB36Ul1yfQp/8fFrKvoqd6I2j/YMnoEjsBxPYiVSKEcLMJ7e3odJoTKkleHS80Jb8OGg5DpRlxhplTpGrJt+hxpQaWAKafsst1Y5uPfy5CnOZyl9HPRJAMtFRcLGNz2cHV+dLp8tiz6NQdIkg8tfywENtr1ZJUdBEi15AdfQegJnAf8082NRhvWhHU8Z7dYbSUdk12eUKdDzDuPNcAlEvz1JUMJpxfEhQtHqrAfbBGHBlUmS8RXywkPHYW83vLdaATwNkiaCLv7anIylR2OSvNqXIKn88n6q1nr1z6QYPKcvxuBLYwKz4HM3iDWFeHVmZ3tyQjEPnJPVrdX7JgQNS/TeFaewGY+tAvTU9rguznZNQTIIDx1Vs1KsYn+y9smPLjTlloDMO7MCksszYId5lGOyi3EkGo+ic6ca/IIYtLSU2AkPtfGHlQovBl9FsXuA7KPekTJLJ5cbG7oR7LqyHGikELj8Edu/Ed7qwyV9LvZRIAJCHt26a7VrEbSRSxsmHcgyytfWF6LtwafC3XsK+YQ14rZiByaJfgBd59jtnOAmN45S1gIu/D0TRD9jb1uGglhi5AYMo+9aSG6MTCWpXP3X4mTCc5VfSI9DGY9Z4ecQmFf3SROrZWWVdkjLOaHJnls4kMRSTfFWH2yOzHaydNGAmuu8hAsF9p8="
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtCheckAll
