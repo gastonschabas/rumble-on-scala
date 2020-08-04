@@ -17,10 +17,5 @@ addons:
     organization: "gastonschabas" # the key of the org you chose at step #3
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION scalafmtCheckAll
-  - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
-  - sbt ++$TRAVIS_SCALA_VERSION scalafmtSbtCheck
-  - sbt ++$TRAVIS_SCALA_VERSION scapegoat
-  - sbt ++$TRAVIS_SCALA_VERSION coverage test
-  - sbt ++$TRAVIS_SCALA_VERSION coverageReport
+  - sbt ++$TRAVIS_SCALA_VERSION ";scalafmtCheckAll ;scalafmtSbtCheck ;scalafmtSbtCheck ;scapegoat ;coverage test ;coverageReport"
   - sonar-scanner
