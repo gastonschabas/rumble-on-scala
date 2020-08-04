@@ -8,7 +8,7 @@ language: scala
 scala:
   - 2.13.2
 jdk:
-  - openjdk8
+  - openjdk11
 
 if: branch = master
 
