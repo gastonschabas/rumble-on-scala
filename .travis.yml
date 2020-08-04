@@ -15,6 +15,7 @@ if: branch = master
 addons:
   sonarcloud:
     organization: "gastonschabas"
+    token: ${SONAR_TOKEN}
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtCheckAll
