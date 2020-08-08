@@ -2,7 +2,9 @@ cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/launchers
-    - $HOME/.cache/coursier/v1
+    - $HOME/.sbt
+    - $HOME/.cache
+    - $HOME/.cache/coursier
 
 language: scala
 scala:
@@ -13,6 +15,8 @@ jdk:
 addons:
   sonarcloud:
     organization: "gastonschabas"
+
+if: branch = master
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION scalafmtCheckAll
