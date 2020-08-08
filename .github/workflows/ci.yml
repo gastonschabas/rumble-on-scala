@@ -20,18 +20,20 @@ jobs:
       run: sbt scalafmtCheckAll
     - name: Check Sbt Format
       run: sbt scalafmtSbtCheck
-    - name: Unit Test with Coverage
-      env:
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      run: |
-        sbt coverage test
-        sbt coverageReport coveralls
-    - name: Scapegoat
-      run: sbt scapegoat
-    - name: Scala Style
-      run: sbt scalastyle
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    # - name: Unit Test with Coverage
+    #   env:
+    #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    #   run: |
+    #     sbt coverage test
+    #     sbt coverageReport coveralls
+    # - name: Scapegoat
+    #   run: sbt scapegoat
+    # - name: Scala Style
+    #   run: sbt scalastyle
+    - name: Sonar Scala
+      run: sbt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN} clean coverage test coverageReport scapegoat sonarScan
+    # - name: SonarCloud Scan
+    #   uses: sonarsource/sonarcloud-github-action@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
