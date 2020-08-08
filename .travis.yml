@@ -22,3 +22,4 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION coverage test
   - sbt ++$TRAVIS_SCALA_VERSION coverageReport
   - sonar-scanner
+
