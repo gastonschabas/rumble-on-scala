@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Setup Scala
-      uses: olafurpg/setup-scala@v5
+      uses: actions/setup-java@v1.4
     - name: Compile
       run: sbt compile
     - name: Check Scala Format
@@ -31,7 +31,12 @@ jobs:
     # - name: Scala Style
     #   run: sbt scalastyle
     - name: Sonar Scala
-      run: sbt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN} clean coverage test coverageReport scapegoat sonarScan
+      run: sbt \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.organization=gastonschabas \
+        -Dsonar.projectKey=gastonschabas_rumble-on-scala
+        -Dsonar.login=${SONAR_TOKEN} \
+        clean coverage test coverageReport scapegoat sonarScan
     # - name: SonarCloud Scan
     #   uses: sonarsource/sonarcloud-github-action@master
     #   env:
