@@ -37,6 +37,10 @@ jobs:
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.organization=gastonschabas \
         -Dsonar.projectKey=gastonschabas_rumble-on-scala \
+        -Dsonar.sources=src/main/scala \
+        -Dsonar.tests=src/test/scala \
+        -Dsonar.scala.scapegoat.reportPaths=target/scala-2.13/scapegoat-report/scapegoat-scalastyle.xml \
+        -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         -Dsonar.login=${SONAR_TOKEN} \
         clean coverage test coverageReport scapegoat sonarScan
     # - name: SonarCloud Scan
