@@ -33,7 +33,7 @@ jobs:
       run: sbt compile
   code-format:
     runs-on: ubuntu-latest
-    needs: environment-setup
+    needs: compile
     steps:
     - name: Check Scala Format
       run: |
@@ -42,7 +42,7 @@ jobs:
           scalafmtSbtCheck
   static-code-analyzer:
     runs-on: ubuntu-latest
-    needs: environment-setup
+    needs: compile
     steps:
     - name: Static Code Analyser
       run: sbt scapegoat
