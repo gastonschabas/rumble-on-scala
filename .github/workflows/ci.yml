@@ -5,9 +5,8 @@ on:
       - master
     paths-ignore:
       - '**.md'
-      - '**.yml'
 jobs:
-  environment-setup:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -25,35 +24,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-  compile:
-    runs-on: ubuntu-latest
-    needs: environment-setup
-    steps:
-    - name: Compile
-      run: sbt compile
-  code-format:
-    runs-on: ubuntu-latest
-    needs: environment-setup
-    steps:
-    - name: Check Scala Format
-      run: sbt scalafmtCheckAll scalafmtSbtCheck
-  static-code-analyzer:
-    runs-on: ubuntu-latest
-    needs: environment-setup
-    steps:
-    - name: Static Code Analyser
-      run: sbt scapegoat
-  test-with-coverage:
-    runs-on: ubuntu-latest
-    needs: compile
-    steps:
-    - name: Unit Test with Coverage
-      run: sbt coverage test coverageReport
-  sonar:
-    runs-on: ubuntu-latest
-    needs: [code-format, static-code-analyzer, test-with-coverage]
-    steps:
-    - name: Sonar
+    - name: Test with Coverage / Static code analyse / Code style
       run: |
         sbt \
         -Dsonar.host.url=https://sonarcloud.io \
@@ -64,4 +35,4 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.13/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }} sonarScan
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }} clean compile coverage test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
