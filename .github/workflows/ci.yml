@@ -26,32 +26,32 @@ jobs:
       with:
         java-version: 11
   compile:
+    runs-on: ubuntu-latest
     - needs: environment-setup
-    - runs-on: ubuntu-latest
     - name: Compile
       run: sbt compile
   code-format:
+    runs-on: ubuntu-latest
     - needs: environment-setup
-    - runs-on: ubuntu-latest
     - name: Check Scala Format
       run: |
         sbt \
           scalafmtCheckAll \
           scalafmtSbtCheck
   static-code-analyzer:
+    runs-on: ubuntu-latest
     - needs: environment-setup
-    - runs-on: ubuntu-latest
     - name: Static Code Analyser
       run: sbt scapegoat
   test-with-coverage:
+    runs-on: ubuntu-latest
     - needs: compile
-    - runs-on: ubuntu-latest
     - name: Unit Test with Coverage
       run: |
         sbt coverage test coverageReport
   sonar:
+    runs-on: ubuntu-latest
     - needs: [code-format, static-code-analyzer, test-with-coverage]
-    - runs-on: ubuntu-latest
     - name: Sonar
       run: |
         sbt \
