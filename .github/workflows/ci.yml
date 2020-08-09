@@ -7,13 +7,13 @@ on:
       - '**.md'
       - '**.yml'
 jobs:
-  compile:
+  environment-setup:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        fetch-depth: 2
+        fetch-depth: 0
     - name: Cache SBT
       uses: actions/cache@v2
       with:
@@ -25,23 +25,34 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    # - name: Compile
-    #   run: sbt compile
-    # - name: Check Scala Format
-    #   run: sbt scalafmtCheckAll
-    # - name: Check Sbt Format
-    #   run: sbt scalafmtSbtCheck
-    # - name: Unit Test with Coverage
-    #   env:
-    #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-    #   run: |
-    #     sbt coverage test
-    #     sbt coverageReport coveralls
-    # - name: Scapegoat
-    #   run: sbt scapegoat
-    # - name: Scala Style
-    #   run: sbt scalastyle
-    - name: Sonar Scala
+  compile:
+    needs: environment-setup
+    runs-on: ubuntu-latest
+    - name: Compile
+      run: sbt compile
+  code-format:
+    needs: environment-setup
+    runs-on: ubuntu-latest
+    - name: Check Scala Format
+      run: |
+        sbt \
+          scalafmtCheckAll \
+          scalafmtSbtCheck
+  static-code-analyzer:
+    needs: environment-setup
+    runs-on: ubuntu-latest
+    - name: Static Code Analyser
+      run: sbt scapegoat
+  test-with-coverage:
+    needs: compile
+    runs-on: ubuntu-latest
+    - name: Unit Test with Coverage
+      run: |
+        sbt coverage test coverageReport
+  sonar:
+    needs: [code-format, static-code-analyzer, test-with-coverage]
+    runs-on: ubuntu-latest
+    - name: Sonar
       run: |
         sbt \
         -Dsonar.host.url=https://sonarcloud.io \
@@ -52,4 +63,4 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.13/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }} clean coverage test coverageReport scapegoat scalastyle sonarScan
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }} sonarScan
