@@ -5,6 +5,11 @@ on:
       - master
     paths-ignore:
       - '**.md'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
 jobs:
   build:
     runs-on: ubuntu-latest
