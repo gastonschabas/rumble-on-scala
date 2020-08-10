@@ -1,0 +1,38 @@
+name: Continious Integration
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cache SBT
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.ivy2/cache
+          ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+    - name: Setup Scala
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Test with Coverage / Static code analyse / Code style
+      run: |
+        sbt \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.organization=gastonschabas \
+        -Dsonar.projectKey=gastonschabas_rumble-on-scala \
+        -Dsonar.sources=src/main/scala \
+        -Dsonar.tests=src/test/scala \
+        -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
+        -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
+        -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }} clean compile coverage test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan

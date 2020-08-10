@@ -15,4 +15,9 @@ class AdderTest extends AnyFunSuite with Matchers {
     adder.run(2, 2) should be(4)
   }
 
+  test("2.0 + 2.0 should be 4.0") {
+    val adder = new Adder
+    adder.run(2.0, 2.0) should be(4.0)
+  }
+
 }
