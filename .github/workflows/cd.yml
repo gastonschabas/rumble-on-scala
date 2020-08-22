@@ -39,3 +39,9 @@ jobs:
         clean compile coverage test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
 #    - name: Publish to Bintray
 #      run: sbt -Dbintray.user=gastonschabas -Dbintray.pass=${{ secrets.BINTRAY_API_KEY }} publish
+    - name: Deploy to heroku
+      uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "rumble-on-scala"
+        heroku_email: "gastonschabas@gmail.com"

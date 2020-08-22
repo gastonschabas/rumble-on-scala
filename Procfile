@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/rumble-on-scala -Dhttp.port=${PORT} -Dplay.http.secret.key=${PLAY_SECRET}
