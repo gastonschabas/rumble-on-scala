@@ -1,4 +1,4 @@
-name: Continious Integration
+name: Continious Delivery
 on:
   push:
     branches:
@@ -37,5 +37,5 @@ jobs:
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
         clean compile coverage test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
-    - name: Publish to Bintray
-      run: sbt -Dbintray.user=gastonschabas -Dbintray.pass=${{ secrets.BINTRAY_API_KEY }} publish
+#    - name: Publish to Bintray
+#      run: sbt -Dbintray.user=gastonschabas -Dbintray.pass=${{ secrets.BINTRAY_API_KEY }} publish
