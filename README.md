@@ -4,7 +4,7 @@ Rumble On Scala
 just a project to experiment with different things around scala ecosystem and other useful tools to build a project.
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=gastonschabas_rumble-on-scala&metric=coverage)](https://sonarcloud.io/dashboard?id=gastonschabas_rumble-on-scala)
-![Continious Delivery](https://github.com/gastonschabas/rumble-on-scala/workflows/Continious%20Delivery/badge.svg)
+[![Continious Delivery](https://github.com/gastonschabas/rumble-on-scala/workflows/Continious%20Delivery/badge.svg)](https://github.com/gastonschabas/rumble-on-scala/actions?query=workflow%3A%22Continious+Delivery%22)
 
 ## Topics Experimented
 
