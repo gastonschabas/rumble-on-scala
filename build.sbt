@@ -12,5 +12,10 @@ licenses += ("GPL-3.0", url(
 lazy val root = (project in file("."))
   .settings(
     name := "rumble-on-scala",
-    libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.0" % Test)
+    libraryDependencies ++= Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % "test",
+      guice
+    )
   )
+  .enablePlugins(PlayScala)
+  .disablePlugins(PlayLayoutPlugin)

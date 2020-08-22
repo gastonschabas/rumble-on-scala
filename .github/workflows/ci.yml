@@ -39,3 +39,9 @@ jobs:
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
         clean compile coverage test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Deploy to heroku
+      uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "rumble-on-scala"
+        heroku_email: "gastonschabas@gmail.com"
