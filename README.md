@@ -30,5 +30,8 @@ workflows right in your repository with GitHub Actions. You can discover, create
 you'd like, including CI/CD, and combine actions in a completely customized workflow.
 
   - There are two workflows:
-    - [Continious Integration](.github/workflows/ci.yml): it will be triggered when a PR is opened against master.
-    - [Continious Delivery](.github/workflows/cd.yml): it will be triggered each time the master branch reaceive a push.
+    - [Continious Integration](.github/workflows/ci.yml): it will be triggered when a PR is opened against master. All
+    the static code analysers will be executed and the generated reports will be sent to sonarcloud. 
+    - [Continious Delivery](.github/workflows/cd.yml): it will be triggered each time the master branch receive a push.
+    All the static code analysers will be executed and the generated reports will be sent to sonarcloud. After that it
+    will automatically deploy the new version to heroku.
