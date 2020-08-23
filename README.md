@@ -9,11 +9,12 @@ just a project to experiment with different things around scala ecosystem and ot
 ## Topics Experimented
 
 ### Unit Testing
-- **ScalaTest**:
+- **[ScalaTest](https://www.scalatest.org/user_guide)**: is designed to increase your team's productivity through
+simple, clear tests and executable specifications that improve both code and communication.
 
 ### Static code analyser 
 - **[ScalaFmt](https://scalameta.org/scalafmt/)**: Formatter tool that can check is your code is well formatted,
-also you can use it to auto format your code instead of just checking  
+also you can use it to auto format your code instead of just checking.
 - **[Scapegoat](https://github.com/sksamuel/scapegoat)**: Scapegoat is a Scala static code analyzer, what is more
 colloquially known as a code lint tool or linter. Scapegoat works in a similar vein to Java's FindBugs or checkstyle,
 or Scala's Scalastyle.
