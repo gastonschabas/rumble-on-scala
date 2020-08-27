@@ -1,1 +1,1 @@
-GET /v0/hello   com.gaston.controller.HelloController.index
+GET /v0/hello           com.gaston.controller.HelloController.index
