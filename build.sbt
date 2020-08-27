@@ -9,11 +9,20 @@ licenses += ("GPL-3.0", url(
   "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
 ))
 
+lazy val testContainerVersion = "0.38.1"
+
 lazy val root = (project in file("."))
+  .configs(IntegrationTest)
   .settings(
+    Defaults.itSettings,
     name := "rumble-on-scala",
     libraryDependencies ++= Seq(
-      "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % "test",
+      "org.scalatestplus.play" %% "scalatestplus-play"             % "5.1.0"              % "it,test",
+      "com.typesafe.play"      %% "play-slick"                     % "4.0.0",
+      "com.dimafeng"           %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
+      "com.dimafeng"           %% "testcontainers-scala-mysql"     % testContainerVersion % "it",
+      "mysql"                   % "mysql-connector-java"           % "8.0.15",
+      "com.danielasfregola"    %% "random-data-generator"          % "2.8"                % "it",
       guice
     )
   )
