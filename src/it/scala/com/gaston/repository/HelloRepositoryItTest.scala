@@ -33,17 +33,20 @@ class HelloRepositoryItTest
 
   lazy val hellosSchemaCreated = repo.createTable
 
-  implicit val arbitraryHello: Arbitrary[Hello] = Arbitrary {
+  val helloSize = 15
+  lazy val randomHellos: Seq[Hello] = random[Hello](helloSize)
+  lazy val randomHellosDistinct: Seq[Hello] = randomHellos.distinct
+  lazy val randomHelloNotLoaded: Hello = randomHellosDistinct.head
+  lazy val randomHellosForInitialLoading: Seq[Hello] = randomHellosDistinct.tail
+
+  implicit lazy val arbitraryString: Arbitrary[String] = Arbitrary(Gen.alphaStr)
+
+  implicit lazy val arbitraryHello: Arbitrary[Hello] = Arbitrary {
     for {
-      msg <- Gen.alphaLowerStr
-      lang <- Gen.alphaLowerStr
+      msg <- Gen.alphaStr
+      lang <- Gen.listOfN(2, Gen.alphaLowerChar).map(_.mkString)
     } yield Hello(None, msg, lang)
   }
-
-  val helloSize = 11
-  lazy val randomHellos: Seq[Hello] = random[Hello](helloSize)
-  lazy val randomHelloNotLoaded: Hello = randomHellos.head
-  lazy val randomHellosForInitialLoading: Seq[Hello] = randomHellos.tail
 
   lazy val hellosInitialDataLoaded = for {
     _ <- hellosSchemaCreated
