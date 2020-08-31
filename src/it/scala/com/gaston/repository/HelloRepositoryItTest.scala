@@ -4,13 +4,13 @@ import com.danielasfregola.randomdatagenerator.RandomDataGenerator._
 import com.dimafeng.testcontainers.{ForAllTestContainer, PostgreSQLContainer}
 import com.gaston.model.Hello
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.funsuite.AsyncFunSuite
+import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.inject.guice.GuiceApplicationBuilder
 
 class HelloRepositoryItTest
-    extends AsyncFunSuite
+    extends AsyncFlatSpec
     with Matchers
     with ForAllTestContainer {
 
@@ -33,28 +33,30 @@ class HelloRepositoryItTest
 
   lazy val hellosSchemaCreated = repo.createTable
 
+  case class Language(code: String)
+  implicit val arbitraryLang: Arbitrary[Language] = Arbitrary {
+    for {
+      x <- Gen.listOfN(2, Gen.alphaLowerChar).map(_.mkString)
+    } yield Language(x)
+  }
+
   val helloSize = 15
-  lazy val randomHellos: Seq[Hello] = random[Hello](helloSize)
-  lazy val randomHellosDistinct: Seq[Hello] = randomHellos.distinct
-  lazy val randomHelloNotLoaded: Hello = randomHellosDistinct.head
-  lazy val randomHellosForInitialLoading: Seq[Hello] = randomHellosDistinct.tail
+  lazy val randomHellos: Seq[Hello] = random[Language](helloSize).distinct
+    .map(l => Hello(None, random[String], l.code))
+
+  lazy val randomHelloNotLoaded: Hello = randomHellos.head
+  lazy val randomHellosForInitialLoading: Seq[Hello] = randomHellos.tail
 
   implicit lazy val arbitraryString: Arbitrary[String] = Arbitrary(Gen.alphaStr)
-
-  implicit lazy val arbitraryHello: Arbitrary[Hello] = Arbitrary {
-    for {
-      msg <- Gen.alphaStr
-      lang <- Gen.listOfN(2, Gen.alphaLowerChar).map(_.mkString)
-    } yield Hello(None, msg, lang)
-  }
 
   lazy val hellosInitialDataLoaded = for {
     _ <- hellosSchemaCreated
     _ <- repo.save(randomHellosForInitialLoading)
   } yield {}
 
+  behavior of s"Langs loaded in db: ${randomHellosForInitialLoading.map(_.lang).mkString(", ")}"
   randomHellosForInitialLoading.foreach { randomHello =>
-    test(s"${randomHello.lang} language should be found") {
+    it should s"found language ${randomHello.lang}" in {
       for {
         _ <- hellosInitialDataLoaded
         maybeHello <- repo.find(randomHello.lang)
@@ -64,7 +66,8 @@ class HelloRepositoryItTest
     }
   }
 
-  test(s"${randomHelloNotLoaded.lang} language should not be found") {
+  behavior of s"Lang not loaded in db: ${randomHelloNotLoaded.lang}"
+  it should s"not found language ${randomHelloNotLoaded.lang} " in {
     for {
       _ <- hellosInitialDataLoaded
       maybeHello <- repo.find(randomHelloNotLoaded.lang)
