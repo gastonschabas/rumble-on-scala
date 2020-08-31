@@ -17,12 +17,12 @@ lazy val root = (project in file("."))
     Defaults.itSettings,
     name := "rumble-on-scala",
     libraryDependencies ++= Seq(
-      "org.scalatestplus.play" %% "scalatestplus-play"             % "5.1.0"              % "it,test",
-      "com.typesafe.play"      %% "play-slick"                     % "4.0.0",
-      "com.dimafeng"           %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
-      "com.dimafeng"           %% "testcontainers-scala-mysql"     % testContainerVersion % "it",
-      "mysql"                   % "mysql-connector-java"           % "8.0.15",
-      "com.danielasfregola"    %% "random-data-generator"          % "2.8"                % "it",
+      "org.scalatestplus.play" %% "scalatestplus-play"              % "5.1.0"              % "it,test",
+      "com.typesafe.play"      %% "play-slick"                      % "4.0.0",
+      "com.dimafeng"           %% "testcontainers-scala-scalatest"  % testContainerVersion % "it",
+      "com.dimafeng"           %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
+      "org.postgresql"          % "postgresql"                      % "42.2.5",
+      "com.danielasfregola"    %% "random-data-generator"           % "2.8"                % "it",
       guice
     )
   )

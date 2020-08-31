@@ -1,7 +1,7 @@
 package com.gaston.repository
 
 import com.danielasfregola.randomdatagenerator.RandomDataGenerator._
-import com.dimafeng.testcontainers.{ForAllTestContainer, MySQLContainer}
+import com.dimafeng.testcontainers.{ForAllTestContainer, PostgreSQLContainer}
 import com.gaston.model.Hello
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.funsuite.AsyncFunSuite
@@ -14,11 +14,11 @@ class HelloRepositoryItTest
     with Matchers
     with ForAllTestContainer {
 
-  override lazy val container: MySQLContainer = MySQLContainer()
+  override lazy val container: PostgreSQLContainer = PostgreSQLContainer()
 
   lazy val app = GuiceApplicationBuilder()
     .configure(
-      "slick.dbs.default.profile" -> "slick.jdbc.MySQLProfile$",
+      "slick.dbs.default.profile" -> "slick.jdbc.PostgresProfile$",
       "slick.dbs.default.db.driver" -> container.driverClassName,
       "slick.dbs.default.db.url" -> container.jdbcUrl,
       "slick.dbs.default.db.user" -> container.username,

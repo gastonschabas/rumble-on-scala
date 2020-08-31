@@ -5,6 +5,7 @@ import javax.inject.Inject
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
+import slick.sql.SqlProfile.ColumnOption.SqlType
 
 import scala.concurrent.Future
 
@@ -15,7 +16,7 @@ class HelloRepository @Inject() (
 
   private class Hellos(tag: Tag) extends Table[Hello](tag, "hellos") {
     def id: Rep[Long] =
-      column[Long]("id", O.PrimaryKey, O.AutoInc)
+      column[Long]("id", SqlType("SERIAL"), O.PrimaryKey, O.AutoInc)
     def msg: Rep[String] = column[String]("msg")
     def lang: Rep[String] = column[String]("lang")
     def * : ProvenShape[Hello] =
