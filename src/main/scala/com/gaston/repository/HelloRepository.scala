@@ -30,14 +30,9 @@ class HelloRepository @Inject() (
 
   def createTable: Future[Unit] = db.run(hellosQuery.schema.createIfNotExists)
 
-  def save(hello: Hello): Future[Hello] = db.run(hellosInsertQuery += hello)
-
   def save(hello: Seq[Hello]): Future[Seq[Hello]] =
     db.run(hellosInsertQuery ++= hello)
 
   def find(lang: String): Future[Option[Hello]] =
     db.run(hellosQuery.filter(_.lang === lang).take(1).result.headOption)
-
-  def delete(lang: String): Future[Int] =
-    db.run(hellosQuery.filter(_.lang === lang).delete)
 }
