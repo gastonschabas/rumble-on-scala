@@ -8,19 +8,25 @@ just a project to experiment with different things around scala ecosystem and ot
 
 ## Topics Experimented
 
-### Unit Testing
+### Unit Test
 - **[ScalaTest](https://www.scalatest.org/user_guide)**: is designed to increase your team's productivity through
 simple, clear tests and executable specifications that improve both code and communication.
+
+### Integration Test
+- **[testcontainers-scala](https://github.com/testcontainers/testcontainers-scala)**: Scala wrapper for [testcontainers-java](https://github.com/testcontainers/testcontainers-java) that allows using docker containers for functional/integration/unit testing.
 
 ### Static code analyser 
 - **[ScalaFmt](https://scalameta.org/scalafmt/)**: Formatter tool that can check is your code is well formatted,
 also you can use it to auto format your code instead of just checking.
+  
 - **[Scapegoat](https://github.com/sksamuel/scapegoat)**: Scapegoat is a Scala static code analyzer, what is more
 colloquially known as a code lint tool or linter. Scapegoat works in a similar vein to Java's FindBugs or checkstyle,
 or Scala's Scalastyle.
+
 - **[Scalastyle](http://www.scalastyle.org/)**: Scalastyle examines your Scala code and indicates potential problems
 with it. If you have come across Checkstyle for Java, then you’ll have a good idea what scalastyle is. Except that
 it’s for Scala obviously.
+
 - **[Sonarcloud](https://sonarcloud.io/documentation)**: SonarCloud is a cloud-based code analysis service designed to
 detect code quality issues in 25 different programming languages, continuously ensuring the maintainability,
 reliability and security of your code.
@@ -35,4 +41,12 @@ you'd like, including CI/CD, and combine actions in a completely customized work
     the static code analysers will be executed and the generated reports will be sent to sonarcloud. 
     - [Continious Delivery](.github/workflows/cd.yml): it will be triggered each time the master branch receive a push.
     All the static code analysers will be executed and the generated reports will be sent to sonarcloud. After that it
-    will automatically deploy the new version to heroku.
+    will automatically deploy the new version to [heroku](https://www.heroku.com/).
+
+### Deploy
+After the CD workflow was executed, a new version of the project is deployed in https://rumble-on-scala.herokuapp.com/.
+An HTTP GET request can be sent to https://rumble-on-scala.herokuapp.com/v0/hello
+
+```shell script
+curl https://rumble-on-scala.herokuapp.com/v0/hello
+``` 
