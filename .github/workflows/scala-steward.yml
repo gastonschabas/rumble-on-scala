@@ -1,7 +1,7 @@
 name: Scala Steward
 on:
   schedule:
-    - cron: '0 0 9 ? * SAT *' 
+    - cron: '0 9 * * 6'
 jobs:
   scala-steward:
     runs-on: ubuntu-latest
