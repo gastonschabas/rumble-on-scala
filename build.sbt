@@ -21,7 +21,7 @@ lazy val root = (project in file("."))
       "com.typesafe.play"      %% "play-slick"                      % "4.0.2",
       "com.dimafeng"           %% "testcontainers-scala-scalatest"  % testContainerVersion % "it",
       "com.dimafeng"           %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
-      "org.postgresql"          % "postgresql"                      % "42.2.5",
+      "org.postgresql"          % "postgresql"                      % "42.2.16",
       "com.danielasfregola"    %% "random-data-generator"           % "2.9"                % "it",
       guice
     )
