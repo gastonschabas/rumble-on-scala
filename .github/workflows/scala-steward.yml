@@ -8,6 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Launch Scala Steward
     steps:
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v2
+        with:
+          git_user_signingkey: true
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       - name: Launch Scala Steward
         uses: scala-steward-org/scala-steward-action@v2
         with:
