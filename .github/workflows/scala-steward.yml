@@ -8,7 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Launch Scala Steward
     steps:
-      - name: Import GPG key
+      - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+    - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v2
         with:
           git_user_signingkey: true
