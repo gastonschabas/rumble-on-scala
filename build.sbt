@@ -22,7 +22,7 @@ lazy val root = (project in file("."))
       "com.dimafeng"           %% "testcontainers-scala-scalatest"  % testContainerVersion % "it",
       "com.dimafeng"           %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"          % "postgresql"                      % "42.2.5",
-      "com.danielasfregola"    %% "random-data-generator"           % "2.8"                % "it",
+      "com.danielasfregola"    %% "random-data-generator"           % "2.9"                % "it",
       guice
     )
   )
