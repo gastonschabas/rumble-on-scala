@@ -13,15 +13,15 @@ jobs:
       with:
         fetch-depth: 0
     - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v2
-        with:
-          git_user_signingkey: true
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      - name: Launch Scala Steward
-        uses: scala-steward-org/scala-steward-action@v2
-        with:
-          github-token: ${{ secrets.SCALA_STEWARD_TOKEN }}
-          author-email: gastonschabas@gmail.com
-          author-name: Gastón Schabas
-          sign-commits: true
+      uses: crazy-max/ghaction-import-gpg@v2
+      with:
+        git_user_signingkey: true
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+    - name: Launch Scala Steward
+      uses: scala-steward-org/scala-steward-action@v2
+      with:
+        github-token: ${{ secrets.SCALA_STEWARD_TOKEN }}
+        author-email: gastonschabas@gmail.com
+        author-name: Gastón Schabas
+        sign-commits: true
