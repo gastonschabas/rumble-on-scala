@@ -18,7 +18,7 @@ lazy val root = (project in file("."))
     name := "rumble-on-scala",
     libraryDependencies ++= Seq(
       "org.scalatestplus.play" %% "scalatestplus-play"              % "5.1.0"              % "it,test",
-      "com.typesafe.play"      %% "play-slick"                      % "4.0.0",
+      "com.typesafe.play"      %% "play-slick"                      % "4.0.2",
       "com.dimafeng"           %% "testcontainers-scala-scalatest"  % testContainerVersion % "it",
       "com.dimafeng"           %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"          % "postgresql"                      % "42.2.5",
