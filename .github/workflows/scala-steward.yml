@@ -1,8 +1,7 @@
 name: Scala Steward
 on:
-  pull_request:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 9 ? * SAT *' 
 jobs:
   scala-steward:
     runs-on: ubuntu-latest
