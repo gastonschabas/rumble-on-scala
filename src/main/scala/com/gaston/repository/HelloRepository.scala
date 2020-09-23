@@ -24,9 +24,10 @@ class HelloRepository @Inject() (
   }
 
   private val hellosQuery = TableQuery[Hellos]
-  private val hellosInsertQuery = hellosQuery returning hellosQuery.map(
-    _.id
-  ) into ((h, id) => h.copy(id = Some(id)))
+  private val hellosInsertQuery =
+    hellosQuery returning hellosQuery.map(_.id) into ((h, id) =>
+      h.copy(id = Some(id))
+    )
 
   def createTable: Future[Unit] = db.run(hellosQuery.schema.createIfNotExists)
 
