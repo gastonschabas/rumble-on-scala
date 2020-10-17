@@ -34,6 +34,10 @@ simple, clear tests and executable specifications that improve both code and com
 providing lightweight, throwaway instances of common databases, Selenium web browsers, or anything else that can run in
 a Docker container.
 
+- **[sbt-native-packager](https://sbt-native-packager.readthedocs.io/en/stable/index.html)**: SBT native packager lets
+you build application packages in native formats and offers different archetypes for common configurations, such as
+simple Java apps or server applications.
+
 - **[random-data-generator](https://github.com/DanielaSfregola/random-data-generator)**: A library to generate random
 data for test purposes, using ScalaCheck and scalacheck-shapeless.
 
@@ -74,14 +78,23 @@ you'd like, including CI/CD, and combine actions in a completely customized work
     sonarcloud. 
     - [Continuous Delivery](.github/workflows/cd.yml): it will be triggered each time new code is pushed to master.
     Unit tests, Integration tests and static code analyser will be executed, and the generated reports will be sent to
-    sonarcloud. After that it will automatically deploy the new version to [heroku](https://www.heroku.com/).
+    sonarcloud.
     - [Scala Steward](https://scala-steward.org): Scala Steward is a bot that helps you keeping scala library
     dependencies and sbt plugins up-to-date. This workflow is scheduled to be triggered each Saturday at 9AM. 
 
-### Deploy
-After the CD workflow was executed, a new version of the project is deployed in https://rumble-on-scala.herokuapp.com/.
-An HTTP GET request can be sent to https://rumble-on-scala.herokuapp.com/v0/hello
-
+### Build Docker Image
+A docker image can be built executing `sbt docker:publishLocal`. It will be published in the local repository.
+The following environment variables must be passed as parameters:
+- [PLAY_SECRET_KEY](https://www.playframework.com/documentation/2.8.x/ApplicationSecret): When started in prod mode, if
+Play finds that the secret is not set, or if it is set to `changeme`, Play will throw an error.
+- JDBC_DATABASE_URL: jdbc url to a postgres database
+- JDBC_DATABASE_USERNAME: username to access postgres database
+- JDBC_DATABASE_PASSWORD: password to access postgres database
+The image has port 9000 exposed, so it must be mapped to be accessed from the outside.
+The command to run the docker image in a container would be something like this
 ```shell script
-curl https://rumble-on-scala.herokuapp.com/v0/hello
-``` 
+docker run --name rumble-on-scala-v0.0.0 \
+  -p 9000:9000 \
+  -e PLAY_SECRET_KEY="some super secret and secure key" \
+  gastonschabas/rumble-on-scala:0.0.0
+```

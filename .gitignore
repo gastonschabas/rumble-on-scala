@@ -6,3 +6,5 @@ target/
 
 .scannerwork/
 
+.bsp/
+.gradle/
