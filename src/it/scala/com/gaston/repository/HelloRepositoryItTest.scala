@@ -14,7 +14,8 @@ class HelloRepositoryItTest
     with Matchers
     with ForAllTestContainer {
 
-  override lazy val container: PostgreSQLContainer = PostgreSQLContainer()
+  override lazy val container: PostgreSQLContainer =
+    PostgreSQLContainer(dockerImageNameOverride = "postgres:13.0-alpine")
 
   lazy val app = GuiceApplicationBuilder()
     .configure(
