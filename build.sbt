@@ -36,7 +36,7 @@ lazy val root = (project in file("."))
     packageName in Docker    := packageName.value,
     version in Docker        := version.value,
     dockerRepository         := Some("gastonschabas"),
-    dockerBaseImage          := "adoptopenjdk:11-jre-openj9",
+    dockerBaseImage          := "adoptopenjdk/openjdk11:jre-11.0.8_10-alpine",
     dockerExposedPorts       := Seq(playPort),
     dockerLabels             := Map("maintainer" -> "gastonschabas@gmail.com"),
     dockerChmodType          := DockerChmodType.UserGroupWriteExecute,
@@ -45,4 +45,5 @@ lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .enablePlugins(DockerPlugin)
   .enablePlugins(JavaAppPackaging)
+  .enablePlugins(AshScriptPlugin)
   .disablePlugins(PlayLayoutPlugin)
