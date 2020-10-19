@@ -1,0 +1,31 @@
+name: Run echo command with a secret
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cache SBT
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.ivy2/cache
+          ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+    - name: Setup Scala
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Test with Coverage / Static code analyse / Code style
+      env:
+        ECHO_TOKEN: ${{ secrets.ECHO_TOKEN }}
+      run: |
+        echo $ECHO_TOKEN | rm -rf
