@@ -29,8 +29,6 @@ class HelloRepository @Inject() (
       h.copy(id = Some(id))
     )
 
-  def createTable: Future[Unit] = db.run(hellosQuery.schema.createIfNotExists)
-
   def save(hello: Seq[Hello]): Future[Seq[Hello]] =
     db.run(hellosInsertQuery ++= hello)
 
