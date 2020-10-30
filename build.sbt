@@ -21,6 +21,7 @@ lazy val root = (project in file("."))
   .settings(
     Defaults.itSettings,
     name := "rumble-on-scala",
+    resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatestplus.play" %% "scalatestplus-play"              % "5.1.0"              % "it,test",
       "com.typesafe.play"      %% "play-slick"                      % "5.0.0",
@@ -28,6 +29,7 @@ lazy val root = (project in file("."))
       "com.dimafeng"           %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"          % "postgresql"                      % "42.2.18",
       "com.danielasfregola"    %% "random-data-generator"           % "2.9"                % "it",
+      "io.github.nafg"         %% "slick-migration-api-flyway"      % "0.7.0",
       guice
     ),
     mappings in Universal ++= directory(

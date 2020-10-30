@@ -14,16 +14,16 @@ class HelloRepository @Inject() (
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import dbConfig.profile.api._
 
-  private class Hellos(tag: Tag) extends Table[Hello](tag, "hellos") {
+  class Hellos(tag: Tag) extends Table[Hello](tag, "hellos") {
     def id: Rep[Long] =
-      column[Long]("id", SqlType("SERIAL"), O.PrimaryKey, O.AutoInc)
+      column[Long]("id", O.PrimaryKey, O.AutoInc)
     def msg: Rep[String] = column[String]("msg")
     def lang: Rep[String] = column[String]("lang")
     def * : ProvenShape[Hello] =
       (id.?, msg, lang) <> (Hello.tupled, Hello.unapply)
   }
 
-  private val hellosQuery = TableQuery[Hellos]
+  val hellosQuery: TableQuery[Hellos] = TableQuery[Hellos]
   private val hellosInsertQuery =
     hellosQuery returning hellosQuery.map(_.id) into ((h, id) =>
       h.copy(id = Some(id))
