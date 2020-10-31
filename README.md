@@ -122,3 +122,16 @@ docker run --name rumble-on-scala-API \
             -p 9000:9000 \
             -d gastonschabas/rumble-on-scala:0.0.0
 ```
+
+## API Spec
+
+### /v0/hello
+#### Accepted Headers
+- **Accept-Language**: ${lang} # available languages: es, en, de, fr
+
+#### Curl Request
+```shell script
+curl --request GET \
+     --header 'Accept-Language: es' \
+    'localhost:9000/v0/hello'
+``` 
