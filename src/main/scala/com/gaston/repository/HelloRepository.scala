@@ -21,6 +21,7 @@ class HelloRepository @Inject() (
     def lang: Rep[String] = column[String]("lang")
     def * : ProvenShape[Hello] =
       (id.?, msg, lang) <> (Hello.tupled, Hello.unapply)
+    val uniqueLangHelloIndex = index("idx_lang", lang, true)
   }
 
   val hellosQuery: TableQuery[Hellos] = TableQuery[Hellos]

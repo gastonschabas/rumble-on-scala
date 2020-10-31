@@ -26,6 +26,7 @@ class FlywayMigrationTool @Inject() (
     : TableMigration[helloRepository.Hellos, Action.Reversible] =
     TableMigration(helloRepository.hellosQuery).create
       .addColumns(_.id, _.msg, _.lang)
+      .addIndexes(_.uniqueLangHelloIndex)
 
   val helloTableMigration = VersionedMigration("1", helloTableCreation)
 
