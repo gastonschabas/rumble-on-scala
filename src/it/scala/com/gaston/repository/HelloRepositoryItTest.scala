@@ -3,6 +3,7 @@ package com.gaston.repository
 import com.danielasfregola.randomdatagenerator.RandomDataGenerator._
 import com.dimafeng.testcontainers.{ForAllTestContainer, PostgreSQLContainer}
 import com.gaston.model.Hello
+import com.gaston.module.MigrationModule
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -15,7 +16,7 @@ class HelloRepositoryItTest
     with ForAllTestContainer {
 
   override lazy val container: PostgreSQLContainer =
-    PostgreSQLContainer(dockerImageNameOverride = "postgres:13.0-alpine")
+    PostgreSQLContainer(dockerImageNameOverride = "postgres:12.0-alpine")
 
   lazy val app = GuiceApplicationBuilder()
     .configure(
@@ -25,14 +26,13 @@ class HelloRepositoryItTest
       "slick.dbs.default.db.user" -> container.username,
       "slick.dbs.default.db.password" -> container.password
     )
+    .bindings(new MigrationModule)
     .build()
 
   lazy val dbConfigProvider: DatabaseConfigProvider =
     app.injector.instanceOf[DatabaseConfigProvider]
 
   lazy val repo = new HelloRepository(dbConfigProvider)
-
-  lazy val hellosSchemaCreated = repo.createTable
 
   case class Language(code: String)
   implicit val arbitraryLang: Arbitrary[Language] = Arbitrary {
@@ -51,7 +51,6 @@ class HelloRepositoryItTest
   implicit lazy val arbitraryString: Arbitrary[String] = Arbitrary(Gen.alphaStr)
 
   lazy val hellosInitialDataLoaded = for {
-    _ <- hellosSchemaCreated
     _ <- repo.save(randomHellosForInitialLoading)
   } yield {}
 

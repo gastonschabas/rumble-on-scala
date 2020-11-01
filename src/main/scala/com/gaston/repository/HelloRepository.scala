@@ -1,35 +1,34 @@
 package com.gaston.repository
 
 import com.gaston.model.Hello
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
-import slick.sql.SqlProfile.ColumnOption.SqlType
 
 import scala.concurrent.Future
 
+@Singleton
 class HelloRepository @Inject() (
   protected val dbConfigProvider: DatabaseConfigProvider
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import dbConfig.profile.api._
 
-  private class Hellos(tag: Tag) extends Table[Hello](tag, "hellos") {
+  class Hellos(tag: Tag) extends Table[Hello](tag, "hellos") {
     def id: Rep[Long] =
-      column[Long]("id", SqlType("SERIAL"), O.PrimaryKey, O.AutoInc)
+      column[Long]("id", O.PrimaryKey, O.AutoInc)
     def msg: Rep[String] = column[String]("msg")
     def lang: Rep[String] = column[String]("lang")
     def * : ProvenShape[Hello] =
       (id.?, msg, lang) <> (Hello.tupled, Hello.unapply)
+    val uniqueLangHelloIndex = index("idx_lang", lang, true)
   }
 
-  private val hellosQuery = TableQuery[Hellos]
-  private val hellosInsertQuery =
+  val hellosQuery: TableQuery[Hellos] = TableQuery[Hellos]
+  private lazy val hellosInsertQuery =
     hellosQuery returning hellosQuery.map(_.id) into ((h, id) =>
       h.copy(id = Some(id))
     )
-
-  def createTable: Future[Unit] = db.run(hellosQuery.schema.createIfNotExists)
 
   def save(hello: Seq[Hello]): Future[Seq[Hello]] =
     db.run(hellosInsertQuery ++= hello)

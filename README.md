@@ -82,19 +82,56 @@ you'd like, including CI/CD, and combine actions in a completely customized work
     - [Scala Steward](https://scala-steward.org): Scala Steward is a bot that helps you keeping scala library
     dependencies and sbt plugins up-to-date. This workflow is scheduled to be triggered each Saturday at 9AM. 
 
-### Build Docker Image
-A docker image can be built executing `sbt docker:publishLocal`. It will be published in the local repository.
+### Build & Publish Local Docker Image
+[sbt-native-packager](https://sbt-native-packager.readthedocs.io/en/stable/index.html) have a couple of tasks and one of
+them is to build and publish a local docker image. This can be done running the following command
+`sbt docker:publishLocal`.
+
+### Run in local environment
+
+## PostgreSQL Container
+A PostgreSQL database must be running to start the app. With the following command, a docker container with the
+PostgreSQL database can be started:
+
+```shell script
+docker run --name rumble-on-scala-postgres \
+            -e POSTGRES_PASSWORD=postgre \
+            -e POSTGRES_USER=postgre \
+            -e POSTGRES_DB=postgre \
+            -p 5432:5432 \
+            -d postgres:12.0-alpine
+```
+
+## API Container
 The following environment variables must be passed as parameters:
+
 - [PLAY_SECRET_KEY](https://www.playframework.com/documentation/2.8.x/ApplicationSecret): When started in prod mode, if
 Play finds that the secret is not set, or if it is set to `changeme`, Play will throw an error.
 - JDBC_DATABASE_URL: jdbc url to a postgres database
 - JDBC_DATABASE_USERNAME: username to access postgres database
 - JDBC_DATABASE_PASSWORD: password to access postgres database
+
 The image has port 9000 exposed, so it must be mapped to be accessed from the outside.
-The command to run the docker image in a container would be something like this
+The command to run the docker image in a container would be something like this:
+
 ```shell script
-docker run --name rumble-on-scala-v0.0.0 \
-  -p 9000:9000 \
-  -e PLAY_SECRET_KEY="some super secret and secure key" \
-  gastonschabas/rumble-on-scala:0.0.0
+docker run --name rumble-on-scala-API \
+            -e PLAY_SECRET_KEY="$(head -c 32 /dev/urandom | base64)" \
+            -e JDBC_DATABASE_URL="jdbc:postgresql://172.17.0.2:5432/postgres" \
+            -e JDBC_DATABASE_USERNAME=postgre -e JDBC_DATABASE_PASSWORD=postgre \
+            -p 9000:9000 \
+            -d gastonschabas/rumble-on-scala:0.0.0
 ```
+
+## API Spec
+
+### /v0/hello
+#### Accepted Headers
+- **Accept-Language**: ${lang} # available languages: es, en, de, fr
+
+#### Curl Request
+```shell script
+curl --request GET \
+     --header 'Accept-Language: es' \
+    'localhost:9000/v0/hello'
+``` 
