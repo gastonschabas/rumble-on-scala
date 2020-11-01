@@ -18,12 +18,12 @@ class HelloController @Inject() (
   langs: Langs
 ) extends AbstractController(cc) {
 
-  val lang = langs.availables.headOption.getOrElse(
-    throw new RuntimeException("no languages were configured")
-  )
-
   def index: Action[AnyContent] =
-    Action.async { _ =>
+    Action.async { request =>
+      val lang = request.acceptLanguages.headOption
+        .orElse(langs.availables.headOption)
+        .getOrElse(throw new RuntimeException("no languages were configured"))
+
       helloRepository.find(lang.language).map {
         case Some(hello) => Ok(hello.msg)
         case None => NotFound(s"hello not found for lang ${lang.language}")

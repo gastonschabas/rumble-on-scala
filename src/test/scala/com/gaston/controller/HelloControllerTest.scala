@@ -46,7 +46,7 @@ class HelloControllerTest
       .returns(Future(None))
   }
 
-  test("/v0/hello should return HTTP status code 200") {
+  test("/v0/hello should return HTTP status code 200 when lang was found") {
     new HelloRepositoryFoundSomeHelloStubFixture {
       val controller =
         new HelloController(
@@ -72,6 +72,19 @@ class HelloControllerTest
       val result = controller.index.apply(FakeRequest())
       val text = contentAsString(result)
       text should be(randomHello.msg)
+    }
+  }
+
+  test("/v0/hello should return HTTP status code 404 when lang was not found") {
+    new HelloRepositoryNotFoundHelloStubFixture {
+      val controller =
+        new HelloController(
+          Helpers.stubControllerComponents(),
+          helloRepository,
+          Helpers.stubLangs()
+        )
+      val result = controller.index.apply(FakeRequest())
+      status(result) should be(NOT_FOUND)
     }
   }
 
