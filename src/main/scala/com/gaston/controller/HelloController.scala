@@ -2,7 +2,7 @@ package com.gaston.controller
 
 import com.gaston.repository.HelloRepository
 import javax.inject.Inject
-import play.api.i18n.I18nSupport
+import play.api.i18n.Langs
 import play.api.mvc.{
   AbstractController,
   Action,
@@ -14,16 +14,19 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 class HelloController @Inject() (
   cc: ControllerComponents,
-  helloRepository: HelloRepository
-) extends AbstractController(cc)
-    with I18nSupport {
+  helloRepository: HelloRepository,
+  langs: Langs
+) extends AbstractController(cc) {
+
+  val lang = langs.availables.headOption.getOrElse(
+    throw new RuntimeException("no languages were configured")
+  )
 
   def index: Action[AnyContent] =
-    Action.async { request =>
-      val lang = request.lang.language
-      helloRepository.find(request.lang.language).map {
-        case Some(value) => Ok(value.msg)
-        case None => NotFound(s"hello not found for lang $lang")
+    Action.async { _ =>
+      helloRepository.find(lang.language).map {
+        case Some(hello) => Ok(hello.msg)
+        case None => NotFound(s"hello not found for lang ${lang.language}")
       }
     }
 

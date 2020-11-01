@@ -1,14 +1,14 @@
 package com.gaston.repository
 
 import com.gaston.model.Hello
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
-import slick.sql.SqlProfile.ColumnOption.SqlType
 
 import scala.concurrent.Future
 
+@Singleton
 class HelloRepository @Inject() (
   protected val dbConfigProvider: DatabaseConfigProvider
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
@@ -25,7 +25,7 @@ class HelloRepository @Inject() (
   }
 
   val hellosQuery: TableQuery[Hellos] = TableQuery[Hellos]
-  private val hellosInsertQuery =
+  private lazy val hellosInsertQuery =
     hellosQuery returning hellosQuery.map(_.id) into ((h, id) =>
       h.copy(id = Some(id))
     )
