@@ -41,7 +41,6 @@ jobs:
         clean compile coverage test it:test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
     - name: Bump Vresion
       run: |
-        git status
-        git branch
-        git config --get user.email
-        git config --get user.name
+        git config user.email "gastonschabas@gmail.com"
+        git config user.name "Gastón Schabas"
+        sbt "release with-defaults skip-tests"
