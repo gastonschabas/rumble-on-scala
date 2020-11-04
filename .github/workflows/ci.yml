@@ -39,3 +39,8 @@ jobs:
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Bump Vresion
+      run: |
+        sbt "git config -get user.email"
+        sbt "git config -get user.name"
+        sbt "release with-defaults skip-tests"
