@@ -12,6 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
+        ref: feature/generate-semversion-using-sbt-autoversion-fix
         fetch-depth: 100
     - name: Cache SBT
       uses: actions/cache@v2
