@@ -1,7 +1,8 @@
-import NativePackagerHelper._
-import com.typesafe.sbt.packager.docker.DockerChmodType
-import com.typesafe.sbt.packager.docker.DockerPermissionStrategy
-import ReleaseTransformations._
+import com.typesafe.sbt.SbtNativePackager.autoImport.NativePackagerHelper._
+import com.typesafe.sbt.packager.docker.{
+  DockerChmodType,
+  DockerPermissionStrategy
+}
 
 ThisBuild / scalaVersion     := "2.12.11"
 ThisBuild / organization     := "com.gaston"
@@ -43,20 +44,7 @@ lazy val root = (project in file("."))
     dockerExposedPorts       := Seq(playPort),
     dockerLabels             := Map("maintainer" -> "gastonschabas@gmail.com"),
     dockerChmodType          := DockerChmodType.UserGroupWriteExecute,
-    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown,
-    releaseProcess := Seq[ReleaseStep](
-      checkSnapshotDependencies, // : ReleaseStep
-      inquireVersions, // : ReleaseStep
-      runClean, // : ReleaseStep
-      runTest, // : ReleaseStep
-      setReleaseVersion, // : ReleaseStep
-      commitReleaseVersion, // : ReleaseStep, performs the initial git checks
-      tagRelease, // : ReleaseStep
-//      publishArtifacts, // : ReleaseStep, checks whether `publishTo` is properly set up
-      setNextVersion, // : ReleaseStep
-      commitNextVersion, // : ReleaseStep
-      pushChanges // : ReleaseStep, also checks that an upstream branch is properly configured
-    )
+    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
   )
   .enablePlugins(PlayScala)
   .enablePlugins(DockerPlugin)
