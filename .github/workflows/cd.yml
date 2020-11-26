@@ -38,11 +38,6 @@ jobs:
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
-#    - name: Bump Vresion
-#      run: |
-#        git config --global user.name "Gastón Schabas"
-#        git config --global user.email "gastonschabas@gmail.com"
-#        sbt "release with-defaults skip-tests"
     - name: Cache Docker layers
       uses: actions/cache@v2
       with:
@@ -72,5 +67,3 @@ jobs:
         cache-to: type=local,dest=/tmp/.buildx-cache
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
-#    - name: Publish to Bintray
-#      run: sbt -Dbintray.user=gastonschabas -Dbintray.pass=${{ secrets.BINTRAY_API_KEY }} publish
