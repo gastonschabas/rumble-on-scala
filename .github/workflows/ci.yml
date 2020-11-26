@@ -54,7 +54,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./target/docker/stage
-        file: ./Dockerfile
+        file: ./target/docker/stage/Dockerfile
         push: true
         tags: gastonschabas/rumble-on-scala:latest
     - name: Image digest
