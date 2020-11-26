@@ -39,6 +39,13 @@ jobs:
         -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
     - name: Docker Stage
       run: sbt docker:stage
     - name: Login to Docker Hub
@@ -57,5 +64,7 @@ jobs:
         file: ./target/docker/stage/Dockerfile
         push: true
         tags: gastonschabas/rumble-on-scala:latest
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
