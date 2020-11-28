@@ -7,7 +7,7 @@ import com.typesafe.sbt.packager.docker.{
 ThisBuild / scalaVersion     := "2.12.11"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
-ThisBuild / scapegoatVersion := "1.4.5"
+ThisBuild / scapegoatVersion := "1.4.6"
 
 licenses += ("GPL-3.0", url(
   "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
