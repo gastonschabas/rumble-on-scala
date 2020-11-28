@@ -78,7 +78,9 @@ you'd like, including CI/CD, and combine actions in a completely customized work
     sonarcloud. 
     - [Continuous Delivery](.github/workflows/cd.yml): it will be triggered each time new code is pushed to master.
     Unit tests, Integration tests and static code analyser will be executed, and the generated reports will be sent to
-    sonarcloud.
+    sonarcloud. Once all the steps mentioned before were executed, it will publish a docker image to the following
+    docker hub repo https://hub.docker.com/repository/docker/gastonschabas/rumble-on-scala, which means the image can be
+    pulled to be executed in an environment that can run docker containers.
     - [Scala Steward](https://scala-steward.org): Scala Steward is a bot that helps you keeping scala library
     dependencies and sbt plugins up-to-date. This workflow is scheduled to be triggered each Saturday at 9AM. 
 
