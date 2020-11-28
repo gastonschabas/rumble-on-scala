@@ -5,12 +5,12 @@ import javax.inject.{Inject, Singleton}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.migration.api.TableMigration.Action
-import slick.migration.api.{Migration, PostgresDialect, TableMigration}
 import slick.migration.api.flyway.{
   MigrationInfo,
   SlickFlyway,
   VersionedMigration
 }
+import slick.migration.api.{Migration, PostgresDialect, TableMigration}
 
 @Singleton
 class FlywayMigrationTool @Inject() (
@@ -34,6 +34,11 @@ class FlywayMigrationTool @Inject() (
     SlickFlyway(db)(Seq(helloTableMigration))
       .load()
 
-  flyway.migrate()
+  def migrate(): Unit = {
+    val _ = flyway.migrate()
+    ()
+  }
+
+  migrate()
 
 }

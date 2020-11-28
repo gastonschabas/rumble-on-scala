@@ -4,10 +4,9 @@ import com.typesafe.sbt.packager.docker.{
   DockerPermissionStrategy
 }
 
-ThisBuild / scalaVersion     := "2.12.11"
+ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
-ThisBuild / scapegoatVersion := "1.4.5"
 
 licenses += ("GPL-3.0", url(
   "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
@@ -33,6 +32,8 @@ lazy val root = (project in file("."))
       "org.scalamock"          %% "scalamock"                       % "5.0.0"              % Test,
       guice
     ),
+    wartremoverErrors in (Compile, compile) ++= Warts.unsafe,
+    wartremoverExcluded += baseDirectory.value / "target",
     mappings in Universal ++= directory(
       baseDirectory.value / "src" / "main" / "resources"
     ),
