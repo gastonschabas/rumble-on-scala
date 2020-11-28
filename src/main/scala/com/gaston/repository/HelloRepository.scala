@@ -9,6 +9,7 @@ import slick.lifted.ProvenShape
 import scala.concurrent.Future
 
 @Singleton
+@SuppressWarnings(Array("org.wartremover.warts.Any"))
 class HelloRepository @Inject() (
   protected val dbConfigProvider: DatabaseConfigProvider
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
