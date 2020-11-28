@@ -1,8 +1,9 @@
 package com.gaston.controller
 
+import com.gaston.exception.validation.HelloLangNotExistException
 import com.gaston.repository.HelloRepository
 import javax.inject.Inject
-import play.api.i18n.Langs
+import play.api.i18n.{Lang, Langs}
 import play.api.mvc.{
   AbstractController,
   Action,
@@ -11,6 +12,7 @@ import play.api.mvc.{
 }
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class HelloController @Inject() (
   cc: ControllerComponents,
@@ -22,12 +24,21 @@ class HelloController @Inject() (
     Action.async { request =>
       val lang = request.acceptLanguages.headOption
         .orElse(langs.availables.headOption)
-        .getOrElse(throw new RuntimeException("no languages were configured"))
+        .toRight(
+          HelloLangNotExistException("no languages were configured", None)
+        )
 
-      helloRepository.find(lang.language).map {
-        case Some(hello) => Ok(hello.msg)
-        case None => NotFound(s"hello not found for lang ${lang.language}")
+      lang match {
+        case Left(_) => Future(InternalServerError)
+        case Right(lang) =>
+          findHelloForLanguage(lang)
       }
     }
 
+  private def findHelloForLanguage(lang: Lang) = {
+    helloRepository.find(lang.language).map {
+      case Some(hello) => Ok(hello.msg)
+      case None => NotFound(s"hello not found for lang ${lang.language}")
+    }
+  }
 }

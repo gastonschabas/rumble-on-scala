@@ -7,6 +7,7 @@ import com.gaston.module.MigrationModule
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
+import org.testcontainers.utility.DockerImageName
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.inject.guice.GuiceApplicationBuilder
 
@@ -16,7 +17,9 @@ class HelloRepositoryItTest
     with ForAllTestContainer {
 
   override lazy val container: PostgreSQLContainer =
-    PostgreSQLContainer(dockerImageNameOverride = "postgres:12.0-alpine")
+    PostgreSQLContainer(dockerImageNameOverride =
+      DockerImageName.parse("postgres:12.0-alpine")
+    )
 
   lazy val app = GuiceApplicationBuilder()
     .configure(
