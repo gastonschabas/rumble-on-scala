@@ -36,7 +36,6 @@ jobs:
         -Dsonar.sources=src/main/scala \
         -Dsonar.tests=src/test/scala \
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
-        -Dsonar.scala.scapegoat.reportPaths=target/scala-2.12/scapegoat-report/scapegoat-scalastyle.xml \
-        -Dsonar.scala.coverage.reportPaths=target/scala-2.12/scoverage-report/scoverage.xml \
-        clean compile coverage test it:test coverageReport scapegoat scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+        -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
+        clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
 
