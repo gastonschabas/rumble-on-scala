@@ -3,10 +3,22 @@ on:
   pull_request:
     branches:
       - master
-    paths-ignore:
-      - '**.md'
 jobs:
+  pre_job:
+    # continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+    - id: skip_check
+      uses: fkirc/skip-duplicate-actions@master
+      with:
+        concurrent_skipping: 'never'
+        paths_ignore: '["**.md"]'
   build:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'false' }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -38,4 +50,3 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
-
