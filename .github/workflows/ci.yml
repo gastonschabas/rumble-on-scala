@@ -50,4 +50,9 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Run codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@master
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: target/scala-2.13/coverage-report/cobertura.xml
 
