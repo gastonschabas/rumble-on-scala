@@ -8,9 +8,35 @@ ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
 
-licenses += ("GPL-3.0", url(
-  "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
-))
+inThisBuild(
+  List(
+    // These are normal sbt settings to configure for release, skip if already defined
+    licenses := Seq(
+      "GPL-3.0" -> url(
+        "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
+      )
+    ),
+    homepage := Some(url("https://github.com/gastonschabas/rumble-on-scala")),
+    developers := List(
+      Developer(
+        "gastonschabas",
+        "Gastón Schabas",
+        "gastonschabas@gmail.com",
+        url("https://github.com/gastonschabas/rumble-on-scala")
+      )
+    ),
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/gastonschabas/rumble-on-scala/"),
+        "scm:git:git@github.com:gastonschabas/rumble-on-scala.git"
+      )
+    ),
+    // These are the sbt-release-early settings to configure
+    pgpPublicRing    := file("/keys/.gnupg/pubring.asc"),
+    pgpSecretRing    := file("/keys/.gnupg/secring.asc"),
+    releaseEarlyWith := SonatypePublisher
+  )
+)
 
 lazy val testContainerVersion = "0.38.7"
 lazy val playPort = 9000
