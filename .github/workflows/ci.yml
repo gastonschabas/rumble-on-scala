@@ -38,5 +38,5 @@ jobs:
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
     - name: SBT CI Release
       env:
-        PGP_SECRET: ${{ secrets.GPG_PRIVATE_KEY }}
+        PGP_SECRET: ${{ secrets.PGP_SECRET }}
       run: sbt ci-release
