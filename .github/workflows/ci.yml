@@ -1,5 +1,8 @@
 name: Continious Integration
 on:
+  push:
+    branches: [ master, main ]
+    tags: [ "*" ]
   pull_request:
     branches:
       - master
