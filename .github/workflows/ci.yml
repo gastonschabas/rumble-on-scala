@@ -37,6 +37,4 @@ jobs:
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
     - name: SBT CI Release
-      run: |
-        echo ${{ secrets.TEST_SECRET }}
-        sbt ci-release
+      run: sbt ci-release
