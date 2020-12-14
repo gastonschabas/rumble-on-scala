@@ -37,4 +37,6 @@ jobs:
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
     - name: SBT CI Release
+      env:
+        PGP_SECRET: ${{ secrets.GPG_PRIVATE_KEY }}
       run: sbt ci-release
