@@ -36,6 +36,8 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Setup PGP
+      uses: olafurpg/setup-gpg@v3
     - name: SBT CI Release
       env:
         PGP_SECRET: ${{ secrets.PGP_SECRET }}
