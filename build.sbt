@@ -8,9 +8,26 @@ ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
 
-licenses += ("GPL-3.0", url(
-  "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
-))
+inThisBuild(
+  List(
+    organization := "com.gaston",
+    homepage     := Some(url("https://github.com/gastonschabas/rumble-on-scala/")),
+    licenses := List(
+      "GPL-3.0" -> url(
+        "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
+      )
+    ),
+    developers := List(
+      Developer(
+        "gastonschabas",
+        "Gastón Schabas",
+        "gastonschabas@gmail.com",
+        url("https://github.com/gastonschabas/rumble-on-scala/")
+      )
+    ),
+    skip in publish := true
+  )
+)
 
 lazy val testContainerVersion = "0.38.8"
 lazy val playPort = 9000
