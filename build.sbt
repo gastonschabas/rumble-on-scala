@@ -34,6 +34,11 @@ lazy val root = (project in file("."))
     ),
     wartremoverErrors in (Compile, compile) ++= Warts.unsafe,
     wartremoverExcluded += baseDirectory.value / "target",
+    publishTo       := Some(Resolver.file("file", new File("/tmp"))),
+    publishArtifact := false,
+    majorRegexes    := Seq("\\[?breaking\\]?.*".r, "\\[?major\\]?.*".r),
+    minorRegexes    := Seq("\\[?minor\\]?.*".r),
+    bugfixRegexes   := Seq("\\[?bugfix\\]?.*".r, "\\[?fix\\]?.*".r, ".*".r),
     mappings in Universal ++= directory(
       baseDirectory.value / "src" / "main" / "resources"
     ),
