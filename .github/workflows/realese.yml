@@ -75,7 +75,7 @@ jobs:
         file: ./target/docker/stage/Dockerfile
         push: true
         tags: |
-          gastonschabas/rumble-on-scala:${{ ##github.ref*/ }}
+          gastonschabas/rumble-on-scala:${{ ##GITHUB_REF*/ }}
           gastonschabas/rumble-on-scala:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
