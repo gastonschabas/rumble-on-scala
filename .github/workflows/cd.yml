@@ -12,6 +12,7 @@ jobs:
       with:
         ref: master
         fetch-depth: 0
+        token: ${{ secrets.PUSH_PERMISSIONS_TOKEN }}
     - name: Cache SBT
       uses: actions/cache@v2
       with:
@@ -37,6 +38,11 @@ jobs:
         -Dsonar.scala.scalastyle.reportPaths=target/scalastyle-result.xml \
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
+    - name: Bump version and tag
+      run: |
+        git config --global user.email "gastonschabas@gmail.com"
+        git config --global user.name "Gastón Schabas"
+        sbt "release with-defaults skip-tests"
     - name: Cache Docker layers
       uses: actions/cache@v2
       with:
