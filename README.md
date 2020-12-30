@@ -94,9 +94,19 @@ you'd like, including CI/CD, and combine actions in a completely customized work
 them is to build and publish a local docker image. This can be done running the following command
 `sbt docker:publishLocal`.
 
-### Run in local environment
+## Run in local environment
 
-## PostgreSQL Container
+### Using docker-compose
+Before start the app and db using `docker-compose` command, a Dockerfile must be generated using `sbt docker:stage`.
+With the following command the app and db can be started:
+
+```shell
+docker-compose --env-file .env up -d
+```
+
+### Start app and db using docker
+
+#### PostgreSQL Container
 A PostgreSQL database must be running to start the app. With the following command, a docker container with the
 PostgreSQL database can be started:
 
@@ -109,7 +119,7 @@ docker run --name rumble-on-scala-postgres \
             -d postgres:12.0-alpine
 ```
 
-## API Container
+#### API Container
 The following environment variables must be passed as parameters:
 
 - [PLAY_SECRET_KEY](https://www.playframework.com/documentation/2.8.x/ApplicationSecret): When started in prod mode, if
