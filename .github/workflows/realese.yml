@@ -45,9 +45,9 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
-          Changes in this Release
-          - First Change
-          - Second Change
+          Changes in this Release:
+          - no release notes for the moment. Next step is to use the commit message that comes from the PR which
+          triggered the release
         draft: false
         prerelease: false
     - name: Cache Docker layers
