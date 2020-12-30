@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    build: ./target/docker/stage/
+    ports:
+      - "9000:9000"
+    environment:
+      - PLAY_SECRET_KEY=${PLAY_SECRET_KEY}
+      - JDBC_DATABASE_URL=${JDBC_DATABASE_URL}
+      - JDBC_DATABASE_USERNAME=${JDBC_DATABASE_USERNAME}
+      - JDBC_DATABASE_PASSWORD=${JDBC_DATABASE_PASSWORD}
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

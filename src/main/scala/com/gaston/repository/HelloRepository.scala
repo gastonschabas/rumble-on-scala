@@ -1,11 +1,11 @@
 package com.gaston.repository
 
 import com.gaston.model.Hello
-import javax.inject.{Inject, Singleton}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
