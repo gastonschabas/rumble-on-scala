@@ -42,12 +42,16 @@ lazy val root = (project in file("."))
     mappings in Universal ++= directory(
       baseDirectory.value / "src" / "main" / "resources"
     ),
-    packageName in Docker    := packageName.value,
-    version in Docker        := version.value,
-    dockerRepository         := Some("gastonschabas"),
-    dockerBaseImage          := "adoptopenjdk:11-jre-openj9",
-    dockerExposedPorts       := Seq(playPort),
-    dockerLabels             := Map("maintainer" -> "gastonschabas@gmail.com"),
+    packageName in Docker := packageName.value,
+    version in Docker     := version.value,
+    dockerRepository      := Some("gastonschabas"),
+    dockerBaseImage       := "adoptopenjdk:11-jre-openj9",
+    dockerExposedPorts    := Seq(playPort),
+    dockerLabels := Map(
+      "maintainer" -> "gastonschabas@gmail.com",
+      "app" -> name.value,
+      "version" -> version.value
+    ),
     dockerChmodType          := DockerChmodType.UserGroupWriteExecute,
     dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
   )
