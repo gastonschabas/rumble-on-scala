@@ -34,6 +34,8 @@ class HelloRepository @Inject() (
   def save(hello: Seq[Hello]): Future[Seq[Hello]] =
     db.run(hellosInsertQuery ++= hello)
 
+  def saveSql(hello: Seq[Hello]): Iterable[String] = (hellosInsertQuery ++= hello).statements
+
   def find(lang: String): Future[Option[Hello]] =
     db.run(hellosQuery.filter(_.lang === lang).take(1).result.headOption)
 }
