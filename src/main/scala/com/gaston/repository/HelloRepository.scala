@@ -1,11 +1,11 @@
 package com.gaston.repository
 
 import com.gaston.model.Hello
-import javax.inject.{Inject, Singleton}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
@@ -33,8 +33,6 @@ class HelloRepository @Inject() (
 
   def save(hello: Seq[Hello]): Future[Seq[Hello]] =
     db.run(hellosInsertQuery ++= hello)
-
-  def saveSql(hello: Seq[Hello]): Iterable[String] = (hellosInsertQuery ++= hello).statements
 
   def find(lang: String): Future[Option[Hello]] =
     db.run(hellosQuery.filter(_.lang === lang).take(1).result.headOption)

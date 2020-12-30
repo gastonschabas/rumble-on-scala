@@ -1,6 +1,5 @@
 package com.gaston.migration
 
-import com.gaston.model.Hello
 import com.gaston.repository.HelloRepository
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
