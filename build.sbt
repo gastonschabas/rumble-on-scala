@@ -53,7 +53,13 @@ lazy val root = (project in file("."))
       "version" -> version.value
     ),
     dockerChmodType          := DockerChmodType.UserGroupWriteExecute,
-    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
+    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown,
+    credentials += Credentials(
+      "GnuPG Key ID",
+      "gpg",
+      "E836345A9EDCF93CAB82F188F4A2CFF444061BCD", // key identifier
+      "ignored" // this field is ignored; passwords are supplied by pinentry
+    )
   )
   .enablePlugins(PlayScala)
   .enablePlugins(DockerPlugin)
