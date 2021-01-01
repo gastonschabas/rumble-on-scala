@@ -81,7 +81,7 @@ jobs:
         release_name: Release ${{ github.ref }}
         body: |
           Changes in this Release:
-          ${ env.RELEASE_BODY_MSG }
+          ${{ env.RELEASE_BODY_MSG }}
         draft: false
         prerelease: false
 
