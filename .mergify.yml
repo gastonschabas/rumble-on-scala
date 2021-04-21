@@ -1,17 +1,19 @@
 pull_request_rules:
   - name: Automatic assign and label scala-steward's PRs
     conditions:
-      - base~=^update/
+      - base=master
+      - head~=^update/
     actions:
       label:
         add: [dependency-update]
   - name: Automatic merge scala-steward's PRs
     conditions:
-      - check-success=Continious Integration / pre_job (pull_request)
-      - check-success=Continious Integration / build (pull_request)
+      - check-success=pre_job
+      - check-success=build
       - check-success=Codacy Static Code Analysis
       - check-success=SonarCloud Code Analysis
-      - base~=^update/
+      - base=master
+      - head~=^update/
     actions:
       merge:
         method: squash
