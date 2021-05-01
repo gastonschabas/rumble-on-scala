@@ -32,21 +32,21 @@ lazy val root = (project in file("."))
       "org.scalamock"          %% "scalamock"                       % "5.1.0"              % Test,
       guice
     ),
-    wartremoverErrors in (Compile, compile) ++= Warts.unsafe,
+    Compile / compile / wartremoverErrors ++= Warts.unsafe,
     wartremoverExcluded += baseDirectory.value / "target",
     publishTo       := Some(Resolver.file("file", new File("/tmp"))),
     publishArtifact := false,
     majorRegexes    := Seq("\\[?breaking\\]?.*".r, "\\[?major\\]?.*".r),
     minorRegexes    := Seq("\\[?minor\\]?.*".r),
     bugfixRegexes   := Seq("\\[?bugfix\\]?.*".r, "\\[?fix\\]?.*".r, ".*".r),
-    mappings in Universal ++= directory(
+    Universal / mappings ++= directory(
       baseDirectory.value / "src" / "main" / "resources"
     ),
-    packageName in Docker := packageName.value,
-    version in Docker     := version.value,
-    dockerRepository      := Some("gastonschabas"),
-    dockerBaseImage       := "adoptopenjdk:11-jre-openj9",
-    dockerExposedPorts    := Seq(playPort),
+    Docker / packageName := packageName.value,
+    Docker / version     := version.value,
+    dockerRepository     := Some("gastonschabas"),
+    dockerBaseImage      := "adoptopenjdk:11-jre-openj9",
+    dockerExposedPorts   := Seq(playPort),
     dockerLabels := Map(
       "maintainer" -> "gastonschabas@gmail.com",
       "app" -> name.value,
