@@ -32,6 +32,7 @@ lazy val root = (project in file("."))
       "org.scalamock"          %% "scalamock"                       % "5.1.0"              % Test,
       guice
     ),
+    coverageExcludedPackages := ".*Reverse.*;.*Routes.*",
     Compile / compile / wartremoverErrors ++= Warts.unsafe,
     wartremoverExcluded += baseDirectory.value / "target",
     publishTo       := Some(Resolver.file("file", new File("/tmp"))),
