@@ -6,5 +6,6 @@ target/
 
 .scannerwork/
 
+.sbt_completion_cache
 .bsp/
 .gradle/
