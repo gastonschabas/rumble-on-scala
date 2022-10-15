@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.docker.{
   DockerPermissionStrategy
 }
 
-ThisBuild / scalaVersion     := "2.13.8"
+ThisBuild / scalaVersion     := "2.13.10"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
 
