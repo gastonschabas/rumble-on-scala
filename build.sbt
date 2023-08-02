@@ -28,7 +28,7 @@ lazy val root = (project in file("."))
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"       % "postgresql"            % "42.6.0",
       "com.danielasfregola" %% "random-data-generator" % "2.9" % "it, test",
-      "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.8.1",
+      "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.10.0",
       "org.scalamock" %% "scalamock" % "5.2.0" % Test,
       guice
     ),
