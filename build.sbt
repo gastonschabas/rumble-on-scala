@@ -23,12 +23,13 @@ lazy val root = (project in file("."))
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % "it, test",
-      "com.typesafe.play"      %% "play-slick"         % "5.0.2",
+      "com.typesafe.play"      %% "play-slick"         % "5.1.0",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2",
       "com.dimafeng" %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"       % "postgresql"            % "42.6.0",
       "com.danielasfregola" %% "random-data-generator" % "2.9" % "it, test",
-      "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.8.1",
+      "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.10.0",
       "org.scalamock" %% "scalamock" % "5.2.0" % Test,
       guice
     ),
