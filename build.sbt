@@ -7,6 +7,7 @@ import com.typesafe.sbt.packager.docker.{
 ThisBuild / scalaVersion     := "2.13.8"
 ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
+ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
 
 licenses += ("GPL-3.0", url(
   "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
