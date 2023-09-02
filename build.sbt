@@ -13,7 +13,7 @@ licenses += ("GPL-3.0", url(
   "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
 ))
 
-lazy val testContainerVersion = "0.40.17"
+lazy val testContainerVersion = "0.41.0"
 lazy val playPort = 9000
 
 lazy val root = (project in file("."))
