@@ -37,21 +37,23 @@ class HelloRepositoryItTest
 
   lazy val repo = new HelloRepository(dbConfigProvider)
 
-  case class Language(code: String)
-  implicit val arbitraryLang: Arbitrary[Language] = Arbitrary {
+  implicit val arbitraryLang: Arbitrary[Hello] = Arbitrary {
     for {
-      x <- Gen.listOfN(2, Gen.alphaLowerChar).map(_.mkString)
-    } yield Language(x)
+      id <- Gen.option(Gen.choose(Long.MinValue, Long.MaxValue))
+      msg <- Gen.alphaStr
+      lang <- Gen
+        .listOfN(2, Gen.alphaLowerChar)
+        .suchThat(_.size == 2)
+        .map(_.mkString)
+    } yield Hello(id = id, msg = msg, lang = lang)
   }
 
   val helloSize = 15
-  lazy val randomHellos: Seq[Hello] = random[Language](helloSize).distinct
-    .map(l => Hello(None, random[String], l.code))
+  lazy val randomHellos: Seq[Hello] =
+    random[Hello](helloSize).distinctBy(_.lang)
 
   lazy val randomHelloNotLoaded: Hello = randomHellos.head
   lazy val randomHellosForInitialLoading: Seq[Hello] = randomHellos.tail
-
-  implicit lazy val arbitraryString: Arbitrary[String] = Arbitrary(Gen.alphaStr)
 
   lazy val hellosInitialDataLoaded = for {
     _ <- repo.save(randomHellosForInitialLoading)
