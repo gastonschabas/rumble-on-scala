@@ -39,7 +39,7 @@ class HelloRepositoryItTest
 
   implicit val arbitraryLang: Arbitrary[Hello] = Arbitrary {
     for {
-      id <- Gen.option(Gen.choose(1L, 1000000L))
+      id <- Gen.option(Gen.choose(Long.MinValue, Long.MaxValue))
       msg <- Gen.alphaStr
       lang <- Gen
         .listOfN(2, Gen.alphaLowerChar)
