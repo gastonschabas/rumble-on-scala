@@ -2,7 +2,7 @@ name: Continious Delivery
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - version.sbt
 jobs:
@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: main
         fetch-depth: 0
         token: ${{ secrets.PUSH_PERMISSIONS_TOKEN }}
     - name: Cache SBT
