@@ -12,7 +12,7 @@ pull_request_rules:
       - check-success=build
       - check-success=Codacy Static Code Analysis
       - check-success=SonarCloud Code Analysis
-      - base=master
+      - base=main
       - head~=^update/
     actions:
       merge:
