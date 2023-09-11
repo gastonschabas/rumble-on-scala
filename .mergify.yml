@@ -1,7 +1,7 @@
 pull_request_rules:
   - name: Automatic assign and label scala-steward's PRs
     conditions:
-      - base=master
+      - base=main
       - head~=^update/
     actions:
       label:
