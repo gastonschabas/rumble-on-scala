@@ -1,6 +1,6 @@
 addSbtPlugin("org.scalameta"     %% "sbt-scalafmt"          % "2.5.2")
 addSbtPlugin("org.scalastyle"    %% "scalastyle-sbt-plugin" % "1.0.0")
-addSbtPlugin("org.scoverage"     %% "sbt-scoverage"         % "2.0.8")
+addSbtPlugin("org.scoverage"     %% "sbt-scoverage"         % "2.0.9")
 addSbtPlugin("com.github.mwz"    %% "sbt-sonar"             % "2.2.0")
 addSbtPlugin("com.typesafe.play" %% "sbt-plugin"            % "2.8.20")
 addSbtPlugin("com.github.sbt"     % "sbt-native-packager"   % "1.9.16")
