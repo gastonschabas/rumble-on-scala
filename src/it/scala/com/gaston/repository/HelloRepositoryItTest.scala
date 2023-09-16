@@ -39,13 +39,13 @@ class HelloRepositoryItTest
 
   implicit val arbitraryLang: Arbitrary[Hello] = Arbitrary {
     for {
-      id <- Gen.option(Gen.choose(Long.MinValue, Long.MaxValue))
       msg <- Gen.alphaStr
       lang <- Gen
         .listOfN(2, Gen.alphaLowerChar)
         .suchThat(_.size == 2)
+        .suchThat(c => !List("en", "de", "es", "fr").contains(c.mkString))
         .map(_.mkString)
-    } yield Hello(id = id, msg = msg, lang = lang)
+    } yield Hello(id = None, msg = msg, lang = lang)
   }
 
   val helloSize = 15
