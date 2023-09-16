@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Cache SBT
       uses: actions/cache@v2
       with:
@@ -19,9 +19,10 @@ jobs:
           ~/.sbt
         key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
     - name: Setup Scala
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
         java-version: 11
+        distribution: corretto
     - name: Test with Coverage / Static code analyse / Code style
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +47,7 @@ jobs:
     - name: Docker Stage
       run: sbt docker:stage
     - name: Login to Docker Hub
-      uses: docker/login-action@v1
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
@@ -59,7 +60,7 @@ jobs:
       run: echo "RELEASE_BODY_MSG=$(git log --skip 2 -1 --pretty=%B)" >> $GITHUB_ENV
     - name: Build and push
       id: docker_build
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v5
       with:
         context: ./target/docker/stage
         file: ./target/docker/stage/Dockerfile
