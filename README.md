@@ -11,6 +11,23 @@ just a project to experiment with different things around scala ecosystem and ot
 [![Docker Pulls](https://img.shields.io/docker/pulls/gastonschabas/rumble-on-scala)](https://hub.docker.com/repository/docker/gastonschabas/rumble-on-scala)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bf145192f50741ef86d798c0b224beea)](https://app.codacy.com/gh/gastonschabas/rumble-on-scala?utm_source=github.com&utm_medium=referral&utm_content=gastonschabas/rumble-on-scala&utm_campaign=Badge_Grade)
 
+## Table of contents
+
+- [Technology Stack Used](#technology-stack-used)
+- [Topics Experimented](#topics-experimented)
+  - [Unit Test](#unit-test)
+  - [Integration Test](#integration-test)
+  - [Static code analyser](#static-code-analyser)
+  - [CI/CD](#cicd)
+  - [Build & Publish Local Docker Image](#build--publish-local-docker-image)
+- [Run in local environment](#run-in-local-environment)
+  - [Using docker-compose](#using-docker-compose)
+  - [Start app and db using docker](#start-app-and-db-using-docker)
+    - [PostgreSQL Container](#postgresql-container)
+    - [API Container](#api-container)
+- [API Spec](#api-spec)
+  - [/v0/hello](#v0hello)
+
 ## Technology Stack Used
 
 - **![Scala Icon](https://www.scala-lang.org/resources/favicon-16x16.png) [Scala](https://www.scala-lang.org/)**: The
