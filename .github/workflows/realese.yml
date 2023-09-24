@@ -12,7 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Cache SBT
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ~/.ivy2/cache
@@ -38,7 +38,7 @@ jobs:
         -Dsonar.scala.coverage.reportPaths=target/scala-2.13/scoverage-report/scoverage.xml \
         clean compile coverage test it:test coverageReport scalastyle scalafmtCheckAll scalafmtSbtCheck sonarScan
     - name: Cache Docker layers
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
         key: ${{ runner.os }}-buildx-${{ github.sha }}
