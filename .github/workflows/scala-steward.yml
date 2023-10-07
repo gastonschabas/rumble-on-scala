@@ -23,4 +23,4 @@ jobs:
         github-token: ${{ secrets.SCALA_STEWARD_TOKEN }}
         author-email: gastonschabas@gmail.com
         author-name: Gastón Schabas
-        sign-commit: true
+        sign-commits: true
