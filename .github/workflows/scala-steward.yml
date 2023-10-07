@@ -2,6 +2,7 @@ name: Scala Steward
 on:
   schedule:
     - cron: '0 9 * * 6'
+  workflow_dispatch:
 jobs:
   scala-steward:
     runs-on: ubuntu-latest
@@ -17,6 +18,7 @@ jobs:
         git_user_signingkey: true
       env:
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
     - name: Launch Scala Steward
       uses: scala-steward-org/scala-steward-action@v2
       with:
