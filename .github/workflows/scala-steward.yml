@@ -17,7 +17,6 @@ jobs:
       with:
         git_user_signingkey: true
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
     - name: Launch Scala Steward
       uses: scala-steward-org/scala-steward-action@v2
       with:
