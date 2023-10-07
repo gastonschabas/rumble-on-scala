@@ -16,7 +16,6 @@ jobs:
       uses: crazy-max/ghaction-import-gpg@v6
       with:
         git_user_signingkey: true
-      env:
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
     - name: Launch Scala Steward
@@ -25,4 +24,4 @@ jobs:
         github-token: ${{ secrets.SCALA_STEWARD_TOKEN }}
         author-email: gastonschabas@gmail.com
         author-name: Gastón Schabas
-        git_commit_gpgsign: true
+        sign-commit: true
