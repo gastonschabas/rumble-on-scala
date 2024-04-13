@@ -31,7 +31,7 @@ lazy val root = (project in file("."))
       "org.postgresql"       % "postgresql"            % "42.7.3",
       "com.danielasfregola" %% "random-data-generator" % "2.9" % "it, test",
       "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.10.0",
-      "org.scalamock" %% "scalamock" % "5.2.0" % Test,
+      "org.scalamock" %% "scalamock" % "6.0.0" % Test,
       guice
     ),
     coverageExcludedPackages := ".*Reverse.*;.*Routes.*",
