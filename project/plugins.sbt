@@ -3,7 +3,7 @@ addSbtPlugin("org.scalastyle"    %% "scalastyle-sbt-plugin" % "1.0.0")
 addSbtPlugin("org.scoverage"     %% "sbt-scoverage"         % "2.0.11")
 addSbtPlugin("com.github.mwz"    %% "sbt-sonar"             % "2.2.0")
 addSbtPlugin("org.playframework" %% "sbt-plugin"            % "3.0.2")
-addSbtPlugin("com.github.sbt"     % "sbt-native-packager"   % "1.9.16")
+addSbtPlugin("com.github.sbt"     % "sbt-native-packager"   % "1.10.0")
 addSbtPlugin("org.wartremover"    % "sbt-wartremover"       % "3.1.6")
 addSbtPlugin("org.scala-sbt"      % "sbt-autoversion"       % "1.0.0")
 
