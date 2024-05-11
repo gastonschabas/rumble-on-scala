@@ -25,7 +25,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % "it, test",
       "org.playframework"      %% "play-slick"         % "6.1.0",
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.0",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.1",
       "com.dimafeng" %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"       % "postgresql"            % "42.7.3",
