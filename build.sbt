@@ -9,9 +9,10 @@ ThisBuild / organization     := "com.gaston"
 ThisBuild / organizationName := "gaston-schabas"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
 
-licenses += ("GPL-3.0", url(
-  "https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE"
-))
+licenses += (
+  "GPL-3.0",
+  url("https://github.com/gastonschabas/rumble-on-scala/blob/master/LICENSE")
+)
 
 lazy val testContainerVersion = "0.41.4"
 lazy val playPort = 9000
