@@ -24,7 +24,7 @@ lazy val root = (project in file("."))
     name := "rumble-on-scala",
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
-      "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % "it, test",
+      "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.2" % "it, test",
       "org.playframework"      %% "play-slick"         % "6.1.1",
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.19.1",
       "com.dimafeng" %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
