@@ -26,13 +26,13 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.2" % "it, test",
       "org.playframework"      %% "play-slick"         % "6.1.1",
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.19.2",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.20.0",
       "com.dimafeng" %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
       "org.postgresql"       % "postgresql"            % "42.7.7",
       "com.danielasfregola" %% "random-data-generator" % "2.9" % "it, test",
       "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.11.0",
-      "org.scalamock" %% "scalamock" % "7.4.1" % Test,
+      "org.scalamock" %% "scalamock" % "7.4.2" % Test,
       guice
     ),
     coverageExcludedPackages := ".*Reverse.*;.*Routes.*",
