@@ -29,7 +29,7 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.20.0",
       "com.dimafeng" %% "testcontainers-scala-scalatest" % testContainerVersion % "it",
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainerVersion % "it",
-      "org.postgresql"       % "postgresql"            % "42.7.7",
+      "org.postgresql"       % "postgresql"            % "42.7.8",
       "com.danielasfregola" %% "random-data-generator" % "2.9" % "it, test",
       "io.github.nafg.slick-migration-api" %% "slick-migration-api-flyway" % "0.11.0",
       "org.scalamock" %% "scalamock" % "7.4.2" % Test,
