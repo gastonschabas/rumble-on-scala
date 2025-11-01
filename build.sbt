@@ -51,7 +51,7 @@ lazy val root = (project in file("."))
     dockerRepository     := Some("gastonschabas"),
     dockerBaseImage      := "amazoncorretto:17-alpine-jdk",
     dockerExposedPorts   := Seq(playPort),
-    dockerLabels := Map(
+    dockerLabels         := Map(
       "maintainer" -> "gastonschabas@gmail.com",
       "app" -> name.value,
       "version" -> version.value
