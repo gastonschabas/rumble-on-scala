@@ -8,7 +8,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - run: |
           for base_pr_id in $(gh pr list --state "open" --json number --jq '.[].number'); do 
             gh pr ready $base_pr_id --undo
