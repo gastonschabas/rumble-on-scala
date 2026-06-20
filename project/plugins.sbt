@@ -4,7 +4,7 @@ addSbtPlugin("org.scoverage"     %% "sbt-scoverage"         % "2.4.3")
 addSbtPlugin("com.github.mwz"    %% "sbt-sonar"             % "2.2.0")
 addSbtPlugin("org.playframework" %% "sbt-plugin"            % "3.0.11")
 addSbtPlugin("com.github.sbt"     % "sbt-native-packager"   % "1.11.7")
-addSbtPlugin("org.wartremover"    % "sbt-wartremover"       % "3.5.8")
+addSbtPlugin("org.wartremover"    % "sbt-wartremover"       % "3.6.0")
 addSbtPlugin("org.scala-sbt"      % "sbt-autoversion"       % "1.0.0")
 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
